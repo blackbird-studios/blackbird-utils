@@ -1,0 +1,41 @@
+{
+  "name": "@blackbird/utils",
+  "version": "0.0.0-development",
+  "description": "Helpers for React projects",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "jest"
+  },
+  "keywords": [
+    "react"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blackbird-studios/blackbird-utils.git"
+  },
+  "bugs": {
+    "url": "https://github.com/blackbird-studios/blackbird-utils/issues"
+  },
+  "homepage": "https://github.com/blackbird-studios/blackbird-utils#readme",
+  "author": "Blackbird devs",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.8.0",
+    "eslint": "^5.16.0",
+    "eslint-config-blackbird": "https://github.com/blackbird-studios/eslint-config-blackbird#v1.0.0",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-jest": "^22.6.4",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.13.0",
+    "jest": "^24.8.0",
+    "prettier": "^1.18.2"
+  },
+  "dependencies": {
+    "lodash": "^4.17.11"
+  }
+}
