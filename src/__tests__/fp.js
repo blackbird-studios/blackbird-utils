@@ -87,6 +87,7 @@ describe('callWith()', () => {
   })
 })
 
+/* eslint-disable no-console */
 describe('log()', () => {
   beforeAll(() => {
     jest.spyOn(console, 'log').mockImplementation(() => {})
@@ -105,6 +106,7 @@ describe('log()', () => {
     expect(console.log).toHaveBeenCalledWith({a: 1})
   })
 })
+/* eslint-enable no-console */
 
 describe('fmapWithKey()', () => {
   test('passes values and keys of object to callback', () => {
