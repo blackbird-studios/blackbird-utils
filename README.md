@@ -116,6 +116,7 @@ If passed an array, returns that array. If passed anything else, returns a singl
 For example:
 ```js
 ensureArray([1, 2, 3]) // returns [1, 2, 3]
+
 ensureArray('abc') // returns ['abc']
 ```
 
@@ -148,6 +149,7 @@ Returns a function which expects an object and returns a new copy of that object
 For example:
 ```js
 removeProps('a')({a: 1, b: 2}) // returns {b: 2}
+
 removeProps(['a', 'b'])({a: 1, b: 2, c: 3}) // returns {c: 3}
 ```
 
@@ -155,7 +157,7 @@ removeProps(['a', 'b'])({a: 1, b: 2, c: 3}) // returns {c: 3}
 
 ```js
 mapToObject(
-  callback: (value: any, key: string) => [key: string, value: any]
+  callback: (value: any, key: string | number) => [key: string, value: any]
 ): Function
 ```
 
@@ -179,7 +181,83 @@ Returns a function which returns a new array with the results of calling the sup
 For example:
 ```js
 interleave(() => 'and then')(['a', 'b', 'c']) // returns ['a', 'and then', 'b', 'and then', 'c']
+
 interleave(
   ({following}) => `the next item will be ${following}`
 )(['a', 'b', 'c']) // returns ['a', 'the next item will be b', 'b', 'the next item will be c', 'c']
+```
+
+### `fmapWithKey()`
+
+```js
+fmapWithKey(
+  callback: (value: any, key: string | number) => any
+): Function
+```
+
+Returns a function which "maps" the supplied callback to every element in its argument. The callback gets passed the value and key of the element
+
+For example:
+```js
+fmapWithKey((value, key) => `${key}${value}`)({a: 1, b: 2}) // returns ['a1', 'b2']
+```
+
+### `fmapValuesWithKey()`
+
+```js
+fmapValuesWithKey(
+  callback: (value: any, key: string | number) => any
+): Function
+```
+
+Returns a function which "maps" the supplied callback to every element in its argument and returns an object whose keys match that argument and whose values are the return values of the callback (like [`mapValues()`](https://lodash.com/docs/4.17.11#mapValues)). The callback gets passed the value and key of the element
+
+For example:
+```js
+fmapValuesWithKey((value, key) => `${key}${value}`)({
+  a: 1,
+  b: 2,
+}) // returns {a: 'a1', b: 'b2'}
+```
+
+### `feachWithKey()`
+
+```js
+feachWithKey(
+  callback: (value: any, key: string | number) => any
+): Function
+```
+
+Returns a function which applies the supplied callback to every element in its argument. The callback gets passed the value and key of the element
+
+For example:
+```js
+const array = []
+feachWithKey((value, key) => array.push(`${key}${value}`))({a: 1, b: 2})
+// now array is ['a1', 'b2']
+
+const array2 = []
+feachWithKey((value, key) => array2.push(`${key}${value}`))(['a', 'b'])
+// now array2 is ['0a', '1b']
+```
+
+### `fflatMapWithKey()`
+
+```js
+fflatMapWithKey(
+  callback: (value: any, key: string | number) => Array<any>
+): Function
+```
+
+Returns a function which "flat-maps" the supplied callback to every element in its argument and returns an array of the flattened results (like [`flatMap()`](https://lodash.com/docs/4.17.11#flatMap)). The callback gets passed the value and key of the element
+
+For example:
+```js
+fflatMapWithKey((value, key) =>
+  key !== 'c' ? [`${key}${value}`] : []
+)({a: 1, b: 2, c: 3}) // returns ['a1', 'b2']
+
+fflatMapWithKey((value, key) =>
+  key !== 2 ? [`${key}${value}`] : []
+)(['a', 'b', 'c']) // returns ['0a', '1b']
 ```
